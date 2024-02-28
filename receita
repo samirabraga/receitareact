@@ -1,0 +1,117 @@
+src/
+└── contexts/
+    └── CartContext.js
+index.html
+style.css
+
+
+// src/contexts/CartContext.js
+
+import React, { createContext, useState } from 'react';
+
+const CartContext = createContext();
+
+const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+  };
+
+  const removeFromCart = (item) => {
+    setCart(cart.filter((cartItem) => cartItem.id !== item.id));
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export { CartContext, CartProvider };
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita de Bolo de Chocolate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Receita de Bolo de Chocolate</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Ingredientes:</h2>
+            <ul>
+                <li>2 xícaras de farinha de trigo</li>
+                <li>1 xícara de cacau em pó</li>
+                <li>1 xícara de açúcar</li>
+                <li>1 xícara de leite</li>
+                <li>1/2 xícara de óleo</li>
+                <li>3 ovos</li>
+                <li>1 colher de sopa de fermento em pó</li>
+                <li>Uma pitada de sal</li>
+                <li>200g de chocolate meio amargo picado</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Modo de Preparo:</h2>
+            <ol>
+                <li>Pré-aqueça o forno a 180°C.</li>
+                <li>Em uma tigela grande, misture a farinha de trigo, o cacau em pó, o açúcar e o sal.</li>
+                <li>Adicione o leite, o óleo e os ovos à mistura seca e mexa até ficar homogêneo.</li>
+                <li>Acrescente o fermento em pó e o chocolate picado, misturando delicadamente.</li>
+                <li>Despeje a massa em uma forma untada e enfarinhada.</li>
+                <li>Asse no forno pré-aquecido por cerca de 30-35 minutos, ou até que um palito inserido no centro saia limpo.</li>
+                <li>Deixe esfriar antes de desenformar e servir.</li>
+            </ol>
+        </section>
+    </main>
+    <footer>
+        <p>Desenvolvido por Seu Nome</p>
+    </footer>
+</body>
+</html>
+
+
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
